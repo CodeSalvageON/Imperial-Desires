@@ -1,0 +1,36 @@
+@font-face {
+  font-family: CHESSEX;
+  src: url('/static/relax.ttf');
+}
+
+body {
+  font-family: CHESSEX;
+  background-color: #eeededff;
+}
+
+.coolTitle {
+  font-size: 35px;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+.stamp {
+  width: 40vw;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  border: 3px solid black;
+  box-shadow: 5px 10px black;
+  background-color: #943d3dFF;
+}
+
+.stamp:hover {
+  cursor: pointer;
+}
+
+#menu2 {
+  display: none;
+}
