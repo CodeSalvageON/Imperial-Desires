@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+`<!DOCTYPE html>
 <html>
   <head>
     <title>
@@ -25,9 +25,37 @@
       <p class="coolTitle center">
         Forging an Empire
       </p>
-      <form id="forgeForm">
-        
+      <form id="forgeForm" autocomplete="off">
+        <p class="normal">Imperial Name: <input type="text" id="empire-name" class="sign" required/></p>
+        <br/>
+        <button class="stamp">
+          Venture Forth!
+        </button>
       </form>
+    </section>
+    <section id="menu3">
+      <p class="coolTitle center">
+        Territorial Scramble
+      </p>
+      <form id="enemyForm" autocomplete="off">
+        <p>Number of Competitors: <input type="number" id="comp-num" class="sign" value="3"/></p>
+        <br/>
+        <button class="stamp">
+          Join the Scramble
+        </button>
+      </form>
+    </section>
+    <section id="menu4">
+      <p class="coolTitle center">
+        Game In Play
+      </p>
+      <br/>
+      <p class="center">Exarchates: <a id="ex-num" class="numCol">10</a></p>
+      <section id="leaderboard"></section>
+      <br/>
+      <section id="the-card" class="center">
+        <p id="card-class">King</p>
+      </section>
     </section>
 
     <script src="/static/game.js"></script>
