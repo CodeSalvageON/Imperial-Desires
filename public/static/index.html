@@ -49,13 +49,33 @@
       <p class="coolTitle center">
         Game In Play
       </p>
+      <p class="center" id="game-status"></p>
       <br/>
-      <p class="center">Exarchates: <a id="ex-num" class="numCol">10</a></p>
+      <p class="center">Exarchates: <a id="ex-num" class="numCol">10</a>, Protectorates: <a id="pro-num" class="numCol">0</a>, Armies: <a id="arm-num" class="numCol">0</a></p>
+      <p>Current Champion: <a id="champion"></a></p>
+      <p id="csDeck">Deck: <a id="deck"></a></p>
       <section id="leaderboard"></section>
       <br/>
-      <section id="the-card" class="center">
-        <p id="card-class">King</p>
+      <section id="non-game-hud" class="center">
+        <section class="late" id="turn-card">Turn Card</section>
       </section>
+      <section id="game-hud" class="center">
+        <section class="late" id="cont">Continue</section>
+        <section class="late" id="use-arm">Use Army</section>
+        <section class="late" id="use-prot">Double Guard</section>
+        <section class="late" id="pay-trib">Pay Tribute</section>
+      </section>
+      <br/>
+      <center>
+        <section class="center" id="card-table">
+          <section class="card" id="card1">
+            <section class="name" id="card1t"></section>
+          </section>
+          <section class="card" id="card2">
+            <section class="name" id="card2t"></section>
+          </section>
+        </section>
+      </center>
     </section>
 
     <script src="/static/game.js"></script>
