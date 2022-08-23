@@ -65,6 +65,10 @@ function measureGame () {
     innerCard1 = 11;
   }
 
+  else if (innerCard1 === "Counter-Army") {
+    innerCard1 = 15;
+  }
+
   else {
     innerCard1 = parseInt(innerCard1);
   }
@@ -169,6 +173,35 @@ function measureGame () {
   card2.style.display = "none";
   nonGameHUD.style.display = "flex";
   gameHUD.style.display = "none";
+
+  if (parseInt(exNum.innerText) === 0) {
+    menu1.style.display = "none";
+    menu2.style.display = "none";
+    menu3.style.display = "none";
+    menu4.style.display = "none";
+
+    menu1.style.display = "block";
+    compArray = [];
+  }
+}
+
+function autoEnemy () {
+  let randomCard1 = Math.floor(Math.random() * 13);
+  let randomCard2 = Math.floor(Math.random() * 13);
+
+  switch (randomCard1) {
+    case 0:
+    case 1:
+      randomCard1 = 14;
+      break;
+  }
+
+  switch (randomCard2) {
+    case 0:
+    case 1:
+      randomCard2 = 14;
+      break;
+  }
 }
 
 againstSystem.onclick = function () {
@@ -273,12 +306,13 @@ useArm.onclick = function () {
 useProt.onclick = function () {
   let proNumAc = parseInt(proNum.innerText);
 
-  if (proNumAc > 1) {
+  if (proNumAc > 1 && card2t.innerText === "Ace") {
     removeItemOnce(deck, deck[Math.floor(Math.random() * deck.length)]);
+    card1t.innerText = "Counter-Army";
   }
 
   else {
-    gameStatus.innerText = "You require two protectorates.";
+    gameStatus.innerText = "You require two protectorates; enemy's card must be an Ace.";
   }
 }
 
@@ -309,8 +343,8 @@ enemyForm.onsubmit = function () {
 }
 
 function generateComp (num) {
-  let randomGov = ["Republic", "Empire", "Duchy", "Kingdom", "Principality", "Sultanate", "Queendom", "Caliphate", "Expedition", "Tribe", "Confederation", "State", "Union", "Commonwealth", "Cult", "Hegemony", "Imperium", "City", "Cartel", "Triumvirate", "Alliance", "Dynasty", "Federation", "Commune", "People's Republic", "Democratic Republic", "Dominion", "Emirate", "Collective", "Pact", "League", "Coalition", "Consortium", "Entente", "Concordat", "Bloc", "Association", "Syndicate"];
-  let randomCountry = ["of the North", "of the South", "of the East", "of the West", "of the Summer Moon", "of the Rising Sun", "of the Morning Fog", "of the Mountain People", "of the Sea People", "of the River People", "of the Forest Dwellers", "of the Endless Fields", "over the Roaring Waves", "of the Hilltop", "of the Corn Children", "of Eternity", "of the Sky", "of the Sea", "of the Water", "of Riches", "of the Hidden World", "of the Secret Garden"];
+  let randomGov = ["Republic", "Empire", "Duchy", "Kingdom", "Principality", "Sultanate", "Queendom", "Caliphate", "Expedition", "Tribe", "Confederation", "State", "Union", "Commonwealth", "Cult", "Hegemony", "Imperium", "City", "Cartel", "Triumvirate", "Alliance", "Dynasty", "Federation", "Commune", "People's Republic", "Democratic Republic", "Dominion", "Emirate", "Collective", "Pact", "League", "Coalition", "Consortium", "Entente", "Concordat", "Bloc", "Association", "Syndicate", "Horde", "Khanate", "Golden Horde", "Rebellion"];
+  let randomCountry = ["of the North", "of the South", "of the East", "of the West", "of the Summer Moon", "of the Rising Sun", "of the Morning Fog", "of the Mountain People", "of the Sea People", "of the River People", "of the Forest Dwellers", "of the Endless Fields", "over the Roaring Waves", "of the Hilltop", "of the Corn Children", "of Eternity", "of the Sky", "of the Sea", "of the Water", "of Riches", "of the Hidden World", "of the Secret Garden", "of the Eternal City", "of the Raging River", "of Time", "of Fire"];
 
   compArray.push(empireName.value + ";p{]" + "10");
   
