@@ -2,7 +2,7 @@
 A simple card game of conquest.
 
 ## Online Version
-https://Imperial-Desires.codesalvageon.repl.co
+https://imperialdesires.netlify.app/
 <br/>
 * The invasion deck is unlimited, so no need for any complex gameplay mechanics other than the fairly simple rules.
 
