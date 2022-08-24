@@ -35,6 +35,7 @@ let compArray = [];
 let deck = [];
 let protEct = 0;
 let armIe = 0;
+let enemyCycle = 0;
 
 function removeItemOnce (arr, value) {
   let index = arr.indexOf(value);
@@ -186,21 +187,51 @@ function measureGame () {
 }
 
 function autoEnemy () {
-  let randomCard1 = Math.floor(Math.random() * 13);
-  let randomCard2 = Math.floor(Math.random() * 13);
+  for (i = 0; i < compArray.length; i++) {
+    let randomCard1 = Math.floor(Math.random() * 13);
+    let randomCard2 = Math.floor(Math.random() * 13);
 
-  switch (randomCard1) {
-    case 0:
-    case 1:
-      randomCard1 = 14;
-      break;
-  }
+    switch (randomCard1) {
+      case 0:
+      case 1:
+        randomCard1 = 14;
+        break;
+    }
 
-  switch (randomCard2) {
-    case 0:
-    case 1:
-      randomCard2 = 14;
-      break;
+    switch (randomCard2) {
+      case 0:
+      case 1:
+        randomCard2 = 14;
+        break;
+    }
+
+    if (randomCard1 < randomCard2) {
+      let enNumbComp = compArray[i].split(";p{]");
+      let enNumbName = enNumbComp[0];
+      let enNumbMath = enNumbComp[1];
+
+      let parseEn = parseInt(enNumbMath);
+
+      parseEn -= 1;
+
+      compArray[i] = enNumbName + ";p{]" + String(parseEn);
+    }
+
+    else if (randomCard1 > randomCard2) {
+      let enNumbComp = compArray[i].split(";p{]");
+      let enNumbName = enNumbComp[0];
+      let enNumbMath = enNumbComp[1];
+
+      let parseEn = parseInt(enNumbMath);
+
+      parseEn += 1;
+
+      compArray[i] = enNumbName + ";p{]" + String(parseEn); 
+    }
+
+    else {
+      // Do absolutely nothing
+    }
   }
 }
 
@@ -290,6 +321,7 @@ turnCard.onclick = function () {
 
 cont.onclick = function () {
   measureGame();
+  autoEnemy();
 }
 
 useArm.onclick = function () {
