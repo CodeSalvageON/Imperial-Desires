@@ -1,4 +1,5 @@
 const againstSystem = document.getElementById("against-the-system");
+const againstWorld = document.getElementById("against-the-world");
 const turnCard = document.getElementById("turn-card");
 const cont = document.getElementById("cont");
 const useArm = document.getElementById("use-arm");
@@ -187,6 +188,10 @@ function measureGame () {
 }
 
 function autoEnemy () {
+  if (gameType === 1) {
+    return false;
+  } 
+  
   for (i = 0; i < compArray.length; i++) {
     let randomCard1 = Math.floor(Math.random() * 13);
     let randomCard2 = Math.floor(Math.random() * 13);
@@ -257,6 +262,12 @@ againstSystem.onclick = function () {
   menu1.style.display = "none";
   menu2.style.display = "block";
   gameType = 0;
+}
+
+againstWorld.onclick = function () {
+  menu1.style.display = "none";
+  menu2.style.display = "block";
+  gameType = 1;
 }
 
 turnCard.onclick = function () {
@@ -380,6 +391,28 @@ forgeForm.onsubmit = function () {
       menu3.style.display = "block";
       
       break;
+    case 1:
+      menu2.style.display = "none";
+      
+      fetch ("/joinarr", {
+        method : "POST",
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        body : JSON.stringify({
+          name: empireName.value
+        })
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        generateDeck();
+        menu4.style.display = "block";
+      })
+      .catch(error => {
+        throw error;
+      })
+      break;
   }
 }
 
@@ -393,8 +426,8 @@ enemyForm.onsubmit = function () {
 }
 
 function generateComp (num) {
-  let randomGov = ["Republic", "Empire", "Duchy", "Kingdom", "Principality", "Sultanate", "Queendom", "Caliphate", "Expedition", "Tribe", "Confederation", "State", "Union", "Commonwealth", "Cult", "Hegemony", "Imperium", "City", "Cartel", "Triumvirate", "Alliance", "Dynasty", "Federation", "Commune", "People's Republic", "Democratic Republic", "Dominion", "Emirate", "Collective", "Pact", "League", "Coalition", "Consortium", "Entente", "Concordat", "Bloc", "Association", "Syndicate", "Horde", "Khanate", "Golden Horde", "Rebellion"];
-  let randomCountry = ["of the North", "of the South", "of the East", "of the West", "of the Summer Moon", "of the Rising Sun", "of the Morning Fog", "of the Mountain People", "of the Sea People", "of the River People", "of the Forest Dwellers", "of the Endless Fields", "over the Roaring Waves", "of the Hilltop", "of the Corn Children", "of Eternity", "of the Sky", "of the Sea", "of the Water", "of Riches", "of the Hidden World", "of the Secret Garden", "of the Eternal City", "of the Raging River", "of Time", "of Fire"];
+  let randomGov = ["Republic", "Empire", "Duchy", "Kingdom", "Principality", "Sultanate", "Queendom", "Caliphate", "Expedition", "Tribe", "Confederation", "State", "Union", "Commonwealth", "Cult", "Hegemony", "Imperium", "City", "Cartel", "Triumvirate", "Alliance", "Dynasty", "Federation", "Commune", "People's Republic", "Democratic Republic", "Dominion", "Emirate", "Collective", "Pact", "League", "Coalition", "Consortium", "Entente", "Concordat", "Bloc", "Association", "Syndicate", "Horde", "Khanate", "Golden Horde", "Rebellion", "Fiefdom"];
+  let randomCountry = ["of the North", "of the South", "of the East", "of the West", "of the Summer Moon", "of the Rising Sun", "of the Morning Fog", "of the Mountain People", "of the Sea People", "of the River People", "of the Forest Dwellers", "of the Endless Fields", "over the Roaring Waves", "of the Hilltop", "of the Corn Children", "of Eternity", "of the Sky", "of the Sea", "of the Water", "of Riches", "of the Hidden World", "of the Secret Garden", "of the Eternal City", "of the Raging River", "of Time", "of Fire", "of Ice", "of the Eagles", "of Honor", "of God"];
 
   compArray.push(empireName.value + ";p{]" + "10");
   
@@ -516,6 +549,45 @@ setInterval(function () {
 
     if (compName === empireName.value) {
       compArray[i] = empireName.value + ";p{]" + String(exNum.innerText);
+
+      switch (gameType) {
+        case 1:
+          fetch ("/modarr", {
+            method: "POST",
+            headers : {
+              "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+              cards : String(i),
+              num : String(exNum.innerText)
+            })
+          })
+          .then(response => response.text())
+          .then(data => {
+            // Do nothing lol
+          })
+          .catch(error => {
+            throw error;
+          })
+          
+          break;
+      }
     }
   }
 }, 100);
+
+setInterval(function () {
+  switch (gameType) {
+    case 1:
+      fetch ("/getarr")
+      .then(response => response.text())
+      .then(data => {
+        compArray = JSON.parse(data);
+      })
+      .catch(error => {
+        throw error;
+      });
+      
+      break;
+  }
+}, 70);
