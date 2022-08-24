@@ -212,9 +212,21 @@ function autoEnemy () {
 
       let parseEn = parseInt(enNumbMath);
 
-      parseEn -= 1;
+      if (enNumbName === empireName.value) {
+        parseEn += 0;
+      }
 
-      compArray[i] = enNumbName + ";p{]" + String(parseEn);
+      else {
+        parseEn -= 1;
+      }
+
+      if (parseEn < 1) {
+        removeItemOnce(enNumbComp + ";p{]" + String(enNumbMath));
+      }
+
+      else {
+        compArray[i] = enNumbName + ";p{]" + String(parseEn);
+      }
     }
 
     else if (randomCard1 > randomCard2) {
@@ -224,7 +236,13 @@ function autoEnemy () {
 
       let parseEn = parseInt(enNumbMath);
 
-      parseEn += 1;
+      if (enNumbName === empireName.value) {
+        parseEn += 0;
+      }
+
+      else {
+        parseEn += 1;
+      }
 
       compArray[i] = enNumbName + ";p{]" + String(parseEn); 
     }
